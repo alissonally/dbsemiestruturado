@@ -2,8 +2,6 @@ package br.exemplosxtream.testes;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,7 +43,7 @@ public class listaContato extends HttpServlet {
 		XStream xstream = new XStream(new DomDriver());
 		xstream.alias("aluno", Aluno.class);//cria alias para a raiz xml
 		xstream.alias("contatos", Contato.class);//cria alias para a raiz xml
-		xstream.alias("disciplinas", Disciplina.class);//cria alias para a raiz xml
+		xstream.alias("disciplina", Disciplina.class);//cria alias para a raiz xml
 		
 		Aluno aluno = new Aluno();
 		aluno.setNome("Alisson");
@@ -80,11 +78,9 @@ public class listaContato extends HttpServlet {
 		matricula.setCurso(curso);//matricula recebe o curso
 		aluno.setMatricula(matricula); //aluno recebe matricula
 		
-		
-		PrintWriter out = response.getWriter();
-		
+		response.setContentType("text/xml");//seta a tipo de saída do documento
+		PrintWriter out = response.getWriter();		
         String alunoEmXML = xstream.toXML(aluno);
-			
 		out.println(alunoEmXML);
 
 		

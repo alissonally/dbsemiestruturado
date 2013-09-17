@@ -6,7 +6,8 @@ import java.util.List;
 public class Curso {
 	private String nome, descricao;
 	private Turma turma;
-	private List disciplina = new ArrayList();
+	@SuppressWarnings("rawtypes")
+	private List disciplinas = new ArrayList();
 
 	
 	
@@ -34,12 +35,14 @@ public class Curso {
 		this.turma = turma;
 	}
 	
-	public void setDisciplina(Disciplina disciplinas){
-		disciplina.add(disciplinas);
+	@SuppressWarnings("unchecked")
+	public void setDisciplina(Disciplina disciplina){
+		disciplinas.add(disciplina);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public List getDisciplina(){
-		return this.disciplina;
+		return this.disciplinas;
 	}
 	
 	

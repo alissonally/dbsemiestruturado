@@ -1,9 +1,8 @@
 package br.exemplosxtreams.modelo;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Disciplina {
+	@SuppressWarnings("unused")
 	private String codigo, nome;
 	private Departamento departamento;
 	
