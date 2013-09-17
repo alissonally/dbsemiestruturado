@@ -3,7 +3,6 @@ package br.exemplosxtreams.modelo;
 public class Matricula {
 	private String codigo;
 	private Curso curso;
-
 	public String getCodigo() {
 		return codigo;
 	}

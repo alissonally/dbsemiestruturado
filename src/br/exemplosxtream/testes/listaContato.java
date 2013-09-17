@@ -16,9 +16,9 @@ import br.exemplosxtreams.modelo.Contato;
 import br.exemplosxtreams.modelo.Curso;
 import br.exemplosxtreams.modelo.Departamento;
 import br.exemplosxtreams.modelo.Disciplina;
-import br.exemplosxtreams.modelo.Disciplinas;
 import br.exemplosxtreams.modelo.Filiacao;
 import br.exemplosxtreams.modelo.Matricula;
+import br.exemplosxtreams.modelo.Turma;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -45,66 +45,48 @@ public class listaContato extends HttpServlet {
 		XStream xstream = new XStream(new DomDriver());
 		xstream.alias("aluno", Aluno.class);//cria alias para a raiz xml
 		xstream.alias("contatos", Contato.class);//cria alias para a raiz xml
+		xstream.alias("disciplinas", Disciplina.class);//cria alias para a raiz xml
 		
 		Aluno aluno = new Aluno();
-		aluno.setNome("Alisson Araújo");
-		aluno.setCpf("00441033369");
+		aluno.setNome("Alisson");
+		aluno.setCpf("004410333-69");
 		
+		//Seta Filiacao
 		Filiacao filiacao = new Filiacao();
-		filiacao.setMae("Maria do Desterro");
-		filiacao.setPai("Francisco Araujo");
-		
-		aluno.setFiliacao(filiacao);
-		
-		
-		List<Contato> lista = new ArrayList<Contato>();
-		
-		Contato contato = new Contato();
+		filiacao.setNomeDaMae("Maria de Desterro");
+		filiacao.setNomeDoPai("Francisco Araújo");		
+		aluno.setFiliacao(filiacao);//aluno recebe filiacao
 
-		lista.add(contato.setTipoDeContato("telefone"));
-		lista.add(contato.setContato("8999993232"));
-		lista.add(contato.setTipoDeContato("Email"));
-		lista.add(contato.setContato("alisson@alisson.com"));
-		aluno.setContato(lista);
-	
-		Departamento dep = new Departamento();
-		dep.setCodigo("dep001");
-		dep.setNome("CCHL");
+		//seta contatos
+		aluno.setContato(new Contato("Telefone", "99212842"));
+		aluno.setContato(new Contato("Email", "alissonaraujo@gmail.com"));
 		
-		
-		Disciplina disciplina = new Disciplina();
-		disciplina.setCodigo("dis001");
-		disciplina.setNome("Ingles");
-		disciplina.setCodigo("dis002");
-		disciplina.setNome("Matematica");
-		disciplina.setDepartamento(dep);
-		
-		Disciplinas disciplinas = new Disciplinas();
-		disciplinas.setDisciplina(disciplina);
-		
+		//matricula
+		Matricula matricula = new Matricula();
+		matricula.setCodigo("44002255");
 		
 		Curso curso = new Curso();
 		curso.setNome("Sistema para internet");
 		curso.setDescricao("Curso voltado para sistema que rodam na web");
-		curso.setDisciplinas(disciplinas);
+			
+		curso.setDisciplina(new Disciplina("004", "Programação para internet", new Departamento("DPCOM", "Departamento de Computação")));
+		curso.setDisciplina(new Disciplina("003", "Banco de Dados Semi estruturados", new Departamento("DPDADOS", "Departamento de banco de dados")));
 		
-
+		Turma turma = new Turma();		
+		turma.setCodigo("0001");
+		turma.setDescricao("Turma 4 período");
 		
-		Matricula matricula = new Matricula();
-		matricula.setCodigo("001");
-		matricula.setCurso(curso);
-		aluno.setMatricula(matricula);
+		curso.setTurma(turma);//curso recebe a turma	
+		matricula.setCurso(curso);//matricula recebe o curso
+		aluno.setMatricula(matricula); //aluno recebe matricula
 		
 		
 		PrintWriter out = response.getWriter();
 		
-       String alunoEmXML = xstream.toXML(aluno);
-		
-		
+        String alunoEmXML = xstream.toXML(aluno);
+			
 		out.println(alunoEmXML);
-		
 
-		
 		
 	}
 

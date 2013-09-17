@@ -1,25 +1,34 @@
 package br.exemplosxtreams.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Disciplina {
-	private String codigo;
-	private String nome;
+	private String codigo, nome;
 	private Departamento departamento;
-	public String getNome() {
-		return nome;
+	
+	public Disciplina(){
+		
 	}
-	public void setNome(String nome) {
+	
+	public Disciplina(String codigo, String nome){
+		this.codigo = codigo;
 		this.nome = nome;
 	}
-	public String getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(String codigo) {
+
+	public Disciplina(String codigo, String nome, Departamento departamento) {
+		super();
 		this.codigo = codigo;
+		this.nome = nome;
+		this.departamento = departamento;
 	}
-	public Departamento getDepartamento() {
-		return departamento;
-	}
+	
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}	
+
 }
